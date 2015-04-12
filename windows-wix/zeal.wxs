@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+    <Product Name='Zeal' Id='e9d1911d-29de-4cfc-8f59-db858f050216'
+      UpgradeCode='5c4b6030-a1b4-4efe-a5af-28f6fa2e7978'
+      Language='1033' Codepage='1252' Version='$(env.ZEAL_VERSION)' Manufacturer='Zeal Developers'>
+
+
+        <Package Id='*' Keywords='Installer' Description='Zeal Installer'
+          Manufacturer='Zeal Developers'
+          InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+        <Media Id='1' Cabinet='Setup.cab' EmbedCab='yes' />
+
+        <Feature Id='App' Title='Zeal' Level='1' Absent="disallow">
+            <ComponentRef Id='MainExecutable' />
+            <ComponentRef Id='DLLs' />
+            <ComponentRef Id='platforms' />
+            <ComponentRef Id='imageformats' />
+            <ComponentRef Id='sqldrivers' />
+            <ComponentRef Id='ProgramMenuDir' />
+        </Feature>
+        <Feature Id='Protocol' Title='dash:// and dash-plugin:// support' Level='1'>
+            <ComponentRef Id='ProtocolHKLM' />
+            <ComponentRef Id='ProtocolHKCU' />
+        </Feature>
+        <Icon Id="zeal.exe" SourceFile="$(env.ZEAL_BIN_DIR)\zeal.exe" />
+        <Property Id="ARPPRODUCTICON" Value="zeal.exe" />
+        <Directory Id='TARGETDIR' Name='SourceDir'>
+            <Directory Id='ProgramFilesFolder' Name='PFiles'>
+                <Directory Id='APPLICATIONFOLDER' Name='Zeal'>
+                    <Component Id='DLLs' Guid='ea0cd148-c03e-4690-8294-7320a5279d82'>
+                        <File Id='ssleay' Name='ssleay32.dll' Source='$(env.QTTOOLSDIR)\opt\bin\ssleay32.dll' />
+                        <File Id='libeay' Name='libeay32.dll' Source='$(env.QTTOOLSDIR)\opt\bin\libeay32.dll' />
+                        <File Id='stdcpp' Name='libstdc++-6.dll' Source='$(env.QTDIR)\bin\libstdc++-6.dll' />
+                        <File Id='gcc' Name='libgcc_s_dw2-1.dll' Source='$(env.QTDIR)\bin\libgcc_s_dw2-1.dll' />
+                        <File Id='pthread' Name='libwinpthread-1.dll' Source='$(env.QTDIR)\bin\libwinpthread-1.dll' />
+                        <File Id='icudt' Name='icudt53.dll' Source='$(env.QTDIR)\bin\icudt53.dll' />
+                        <File Id='icuin' Name='icuin53.dll' Source='$(env.QTDIR)\bin\icuin53.dll' />
+                        <File Id='icuuc' Name='icuuc53.dll' Source='$(env.QTDIR)\bin\icuuc53.dll' />
+                        <File Id='QtCore' Name='Qt5Core.dll' Source='$(env.QTDIR)\bin\Qt5Core.dll' />
+                        <File Id='QtGui' Name='Qt5Gui.dll' Source='$(env.QTDIR)\bin\Qt5Gui.dll' />
+                        <File Id='QtMultimedia' Name='Qt5Multimedia.dll' Source='$(env.QTDIR)\bin\Qt5Multimedia.dll' />
+                        <File Id='QtMultimediaWidgets' Name='Qt5MultimediaWidgets.dll' Source='$(env.QTDIR)\bin\Qt5MultimediaWidgets.dll' />
+                        <File Id='QtNetwork' Name='Qt5Network.dll' Source='$(env.QTDIR)\bin\Qt5Network.dll' />
+                        <File Id='QtOpenGL' Name='Qt5OpenGL.dll' Source='$(env.QTDIR)\bin\Qt5OpenGL.dll' />
+                        <File Id='QtQml' Name='Qt5Qml.dll' Source='$(env.QTDIR)\bin\Qt5Qml.dll' />
+                        <File Id='QtQuick' Name='Qt5Quick.dll' Source='$(env.QTDIR)\bin\Qt5Quick.dll' />
+                        <File Id='QtSql' Name='Qt5Sql.dll' Source='$(env.QTDIR)\bin\Qt5Sql.dll' />
+                        <File Id='QtWebKit' Name='Qt5WebKit.dll' Source='$(env.QTDIR)\bin\Qt5WebKit.dll' />
+                        <File Id='QtWebKitWidgets' Name='Qt5WebKitWidgets.dll' Source='$(env.QTDIR)\bin\Qt5WebKitWidgets.dll' />
+                        <File Id='QtWebChannel' Name='Qt5WebChannel.dll' Source='$(env.QTDIR)\bin\Qt5WebChannel.dll' />
+                        <File Id='QtWidgets' Name='Qt5Widgets.dll' Source='$(env.QTDIR)\bin\Qt5Widgets.dll' />
+                        <File Id='QtPositioning' Name='Qt5Positioning.dll' Source='$(env.QTDIR)\bin\Qt5Positioning.dll' />
+                        <File Id='QtPrintSupport' Name='Qt5PrintSupport.dll' Source='$(env.QTDIR)\bin\Qt5PrintSupport.dll' />
+                        <File Id='QtSensors' Name='Qt5Sensors.dll' Source='$(env.QTDIR)\bin\Qt5Sensors.dll' />
+                    </Component>
+                    <Directory Id='imageformats' Name='imageformats'>
+                        <Component Id='imageformats' Guid='9997edc7-0b97-4b29-9cc9-76a9c3875f9d'>
+                            <File Id='if_gif' Name='qgif.dll' Source='$(env.QTDIR)\plugins\imageformats\qgif.dll' />
+                            <File Id='if_ico' Name='qico.dll' Source='$(env.QTDIR)\plugins\imageformats\qico.dll' />
+                            <File Id='if_jpeg' Name='qjpeg.dll' Source='$(env.QTDIR)\plugins\imageformats\qjpeg.dll' />
+                            <File Id='if_tiff' Name='qtiff.dll' Source='$(env.QTDIR)\plugins\imageformats\qtiff.dll' />
+                        </Component>
+                    </Directory>
+                    <Directory Id='platforms' Name='platforms'>
+                        <Component Id='platforms' Guid='637c240b-a070-44c6-922d-3bca338ab00c'>
+                            <File Id='plat_windows' Name='qwindows.dll' Source='$(env.QTDIR)\plugins\platforms\qwindows.dll' />
+                        </Component>
+                    </Directory>
+                    <Directory Id='sqldrivers' Name='sqldrivers'>
+                        <Component Id='sqldrivers' Guid='7a1e942f-8e32-4e40-b00c-907911a7707a'>
+                            <File Id='sql_sqlite' Name='qsqlite.dll' Source='$(env.QTDIR)\plugins\sqldrivers\qsqlite.dll' />
+                        </Component>
+                    </Directory>
+                    <Component Id='MainExecutable' Guid='872a29c2-cfc9-4657-a41a-407dc63600df'>
+                        <File Id='ZealEXE' Name='zeal.exe' Source='$(env.ZEAL_BIN_DIR)\zeal.exe' KeyPath='yes'>
+                            <Shortcut Id="startmenuZeal" Directory="ProgramMenuDir" Name="Zeal"
+                  WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
+                            <Shortcut Id="desktopZeal" Directory="DesktopFolder" Name="Zeal"
+                  WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
+                        </File>
+                    </Component>
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder" Name="Programs">
+                <Directory Id="ProgramMenuDir" Name="Foobar 1.0">
+                    <Component Id="ProgramMenuDir" Guid="6d2053d4-6231-4fba-a038-a32b19cec1b7">
+                        <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+                        <RegistryValue Root='HKCU' Key='Software\Zeal\Zeal' Type='string' Value='' KeyPath='yes' />
+                    </Component>
+                </Directory>
+            </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop" />
+            <Component Id="ProtocolHKLM" Guid="4c104822-68d5-44b4-9a00-e5227a31c3f1">
+                <Condition>ALLUSERS</Condition>
+
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Type='string' Value='Zeal Search (Dash Protocol)' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type='string' Value='' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Type='string' Value='Zeal Search (Dash Protocol)' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type='string' Value='' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+            </Component>
+            <Component Id="ProtocolHKCU" Guid="f0d12dff-386a-4e81-9003-e14ddba5a0a7">
+                <Condition>NOT ALLUSERS</Condition>
+
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Type='string' Value='Zeal Search (Dash Protocol)' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type='string' Value='' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Type='string' Value='Zeal Search (Dash Protocol)' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type='string' Value='' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+            </Component>
+        </Directory>
+        <UIRef Id='WixUI_Advanced' />
+        <Property Id='ApplicationFolderName' Value='Zeal' />
+        <Property Id='WixAppFolder' Value='WixPerMachineFolder' />
+        <Property Id='ALLUSERS' Value='1' />
+        <WixVariable Id="WixUILicenseRtf" Value="COPYING.rtf" /> 
+    </Product>
+</Wix>
