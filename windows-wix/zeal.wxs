@@ -83,7 +83,7 @@
                 </Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder" Name="Programs">
-                <Directory Id="ProgramMenuDir" Name="Foobar 1.0">
+                <Directory Id="ProgramMenuDir" Name="Zeal">
                     <Component Id="ProgramMenuDir" Guid="6d2053d4-6231-4fba-a038-a32b19cec1b7">
                         <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
                         <RegistryValue Root='HKCU' Key='Software\Zeal\Zeal' Type='string' Value='' KeyPath='yes' />
