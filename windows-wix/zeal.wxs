@@ -25,6 +25,7 @@
         </Feature>
         <Icon Id="zeal.exe" SourceFile="$(env.ZEAL_BIN_DIR)\zeal.exe" />
         <Property Id="ARPPRODUCTICON" Value="zeal.exe" />
+        <Property Id="ARPHELPLINK" Value="http://zealdocs.org" />
         <Directory Id='TARGETDIR' Name='SourceDir'>
             <Directory Id='ProgramFilesFolder' Name='PFiles'>
                 <Directory Id='APPLICATIONFOLDER' Name='Zeal'>
