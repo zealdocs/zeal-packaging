@@ -19,6 +19,8 @@ curl -L -o "$SRC_TARBALL" https://github.com/zealdocs/zeal/archive/v$ZEAL_VER.ta
 
 # TODO: dch -v
 
+upload_tarball=true
+
 for DISTR in ${DISTRS[@]}
 do
     echo "Preparing $DISTR package..."
@@ -29,7 +31,12 @@ do
     sed -i -- "s/#DISTR#/$DISTR/g" "$SRC_DIR"/debian/changelog
 
     cd "$SRC_DIR"
-    debuild -S -sa
+    if [ "$upload_tarball" = true ] ; then
+        upload_tarball=false
+        debuild -S -sa
+    else
+        debuild -S -sd
+    fi
     cd ..
 
     dput "ppa:$PPA" "zeal_$ZEAL_VER-1ppa1~${DISTR}1_source.changes"
