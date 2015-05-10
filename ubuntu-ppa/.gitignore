@@ -2,3 +2,4 @@
 *.dsc
 *.build
 *.changes
+*.ppa.upload
