@@ -1,0 +1,23 @@
+Source: zeal
+Section: extra
+Priority: optional
+Maintainer: Oleg Shparber <oleg@zealdocs.org>
+Build-Depends: debhelper (>= 8.0.0), qtbase5-private-dev, libqt5webkit5-dev, libarchive-dev, libappindicator-dev
+Standards-Version: 3.9.4
+Homepage: http://zealdocs.org
+Vcs-Git: git://github.com/zealdocs/zeal.git
+Vcs-Browser: https://github.com/zealdocs/zeal
+
+Package: zeal
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Zeal Documentation Browser
+ Zeal is an offline documentation browser inspired by Dash.
+
+Package: zeal-dbg
+Architecture: any
+Depends: ${misc:Depends}, zeal (= ${binary:Version})
+Description: Debug symbols for zeal
+ Zeal is an offline documentation browser inspired by Dash.
+ .
+ This package contains debug symbols for zeal.

@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+include /usr/share/dpkg/default.mk
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export QT_SELECT=qt5
+
+%:
+	dh $@ --buildsystem=qmake --dbg-package=zeal-dbg
+
+override_dh_auto_configure:
+#	dh_auto_configure -- DESTDIR=$(CURDIR)
+	qmake zeal.pro QMAKE_STRIP=:
