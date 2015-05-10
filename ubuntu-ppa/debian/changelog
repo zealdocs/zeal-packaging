@@ -1,3 +1,9 @@
+zeal (1:0.1.1-1ppa1~#DISTR#1) #DISTR#; urgency=low
+
+  * New upstream release.
+
+ -- Oleg Shparber <trollixx@gmail.com>  Sun, 10 May 2015 01:52:00 -0700
+
 zeal (1:0.1.0-1ppa1~#DISTR#1) #DISTR#; urgency=low
 
   * Initial release of Ubuntu PPA package.

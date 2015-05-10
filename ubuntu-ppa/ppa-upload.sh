@@ -10,7 +10,7 @@ PPA="zeal-developers/ppa"
 #    exit 1
 #fi
 
-ZEAL_VER=0.1.0
+ZEAL_VER=0.1.1
 
 SRC_TARBALL="zeal_$ZEAL_VER.orig.tar.gz"
 SRC_DIR="zeal-$ZEAL_VER"
