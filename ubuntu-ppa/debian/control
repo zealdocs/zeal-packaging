@@ -10,7 +10,7 @@ Vcs-Browser: https://github.com/zealdocs/zeal
 
 Package: zeal
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5sql5-sqlite
 Description: Zeal Documentation Browser
  Zeal is an offline documentation browser inspired by Dash.
 
