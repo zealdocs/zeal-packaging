@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='windows-1252'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-    <Product Name='Zeal' Id='e9d1911d-29de-4cfc-8f59-db858f050216'
+    <Product Name='Zeal' Id='*'
       UpgradeCode='5c4b6030-a1b4-4efe-a5af-28f6fa2e7978'
       Language='1033' Codepage='1252' Version='$(env.ZEAL_VERSION)' Manufacturer='Zeal Developers'>
 
