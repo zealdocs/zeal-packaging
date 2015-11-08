@@ -37,9 +37,9 @@
                         <File Id='stdcpp' Name='libstdc++-6.dll' Source='$(env.QTDIR)\bin\libstdc++-6.dll' />
                         <File Id='gcc' Name='libgcc_s_dw2-1.dll' Source='$(env.QTDIR)\bin\libgcc_s_dw2-1.dll' />
                         <File Id='pthread' Name='libwinpthread-1.dll' Source='$(env.QTDIR)\bin\libwinpthread-1.dll' />
-                        <File Id='icudt' Name='icudt53.dll' Source='$(env.QTDIR)\bin\icudt53.dll' />
-                        <File Id='icuin' Name='icuin53.dll' Source='$(env.QTDIR)\bin\icuin53.dll' />
-                        <File Id='icuuc' Name='icuuc53.dll' Source='$(env.QTDIR)\bin\icuuc53.dll' />
+                        <File Id='icudt' Name='icudt54.dll' Source='$(env.QTDIR)\bin\icudt54.dll' />
+                        <File Id='icuin' Name='icuin54.dll' Source='$(env.QTDIR)\bin\icuin54.dll' />
+                        <File Id='icuuc' Name='icuuc54.dll' Source='$(env.QTDIR)\bin\icuuc54.dll' />
                         <File Id='QtCore' Name='Qt5Core.dll' Source='$(env.QTDIR)\bin\Qt5Core.dll' />
                         <File Id='QtGui' Name='Qt5Gui.dll' Source='$(env.QTDIR)\bin\Qt5Gui.dll' />
                         <File Id='QtMultimedia' Name='Qt5Multimedia.dll' Source='$(env.QTDIR)\bin\Qt5Multimedia.dll' />
