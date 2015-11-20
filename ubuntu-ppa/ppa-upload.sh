@@ -4,6 +4,10 @@
 DISTRS=(trusty utopic vivid wily)
 PPA="zeal-developers/ppa"
 
+function failure {
+    echo -e "\033[1mERROR:\033[0m \E[31m$1\033[0m"
+    exit 1
+}
 
 if [ "$#" -ne 1 ]; then
     echo "Version required"
@@ -16,6 +20,7 @@ SRC_TARBALL="zeal_$ZEAL_VER.orig.tar.gz"
 SRC_DIR="zeal-$ZEAL_VER"
 
 curl -L -o "$SRC_TARBALL" https://github.com/zealdocs/zeal/archive/v$ZEAL_VER.tar.gz
+[ -f "$SRC_TARBALL" ] && failure "Cannot download tarball"
 
 # TODO: dch -v
 
