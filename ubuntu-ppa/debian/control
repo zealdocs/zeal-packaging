@@ -2,7 +2,7 @@ Source: zeal
 Section: devel
 Priority: extra
 Maintainer: Oleg Shparber <oleg@zealdocs.org>
-Build-Depends: debhelper (>= 8.0.0), qtbase5-private-dev, libqt5webkit5-dev, libqt5x11extras5-dev, libarchive-dev, libappindicator-dev
+Build-Depends: debhelper (>= 8.0.0), qtbase5-private-dev, libqt5webkit5-dev, libqt5x11extras5-dev, libarchive-dev, libappindicator-dev, libxcb-keysyms1-dev
 Standards-Version: 3.9.4
 Homepage: http://zealdocs.org
 Vcs-Git: git://github.com/zealdocs/zeal.git
