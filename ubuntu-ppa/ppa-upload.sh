@@ -4,13 +4,13 @@
 DISTRS=(trusty utopic vivid wily)
 PPA="zeal-developers/ppa"
 
-# TODO: Ask version
-#if [ "$#" -ne 1 ]; then
-#    echo "Version required"
-#    exit 1
-#fi
 
-ZEAL_VER=0.1.1
+if [ "$#" -ne 1 ]; then
+    echo "Version required"
+    exit 1
+fi
+
+ZEAL_VER=$1
 
 SRC_TARBALL="zeal_$ZEAL_VER.orig.tar.gz"
 SRC_DIR="zeal-$ZEAL_VER"
