@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ubuntu distributions
-DISTRS=(trusty utopic vivid wily)
+DISTRS=(trusty vivid wily)
 PPA="zeal-developers/ppa"
 
 function failure {
