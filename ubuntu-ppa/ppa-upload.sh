@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ubuntu distributions
-DISTRS=(trusty utopic vivid)
+DISTRS=(trusty utopic vivid wily)
 PPA="zeal-developers/ppa"
 
 # TODO: Ask version
