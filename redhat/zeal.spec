@@ -2,7 +2,7 @@
 
 Summary: Zeal: Simple offline API documentation browser
 Name: zeal
-Version: 0.2.0
+Version: 0.2.1
 Release: 1%{?dist}
 License: GPLv3+
 Group: Development/Tools
