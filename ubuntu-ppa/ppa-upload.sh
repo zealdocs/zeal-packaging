@@ -20,7 +20,7 @@ SRC_TARBALL="zeal_$ZEAL_VER.orig.tar.gz"
 SRC_DIR="zeal-$ZEAL_VER"
 
 curl -L -o "$SRC_TARBALL" https://github.com/zealdocs/zeal/archive/v$ZEAL_VER.tar.gz
-[ -f "$SRC_TARBALL" ] && failure "Cannot download tarball"
+[ ! -f "$SRC_TARBALL" ] && failure "Cannot download tarball"
 
 # TODO: dch -v
 
