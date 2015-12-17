@@ -22,5 +22,5 @@ spectool --sourcedir --get-files zeal.spec
 
 ### Build RPM
 ```sh
-rpmbuild --clean zeal.spec
+rpmbuild -bb zeal.spec
 ```
