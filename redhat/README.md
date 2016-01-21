@@ -21,7 +21,7 @@ spectool --sourcedir --get-files zeal.spec
 ```
 
 ### Prepare the RPM Build Directories
-*See the [CentOS Howto](https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment) for more information)*
+*See the [CentOS Howto](https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment) for more information*
 ```sh
 mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros
