@@ -7,7 +7,7 @@ Release: 1%{?dist}
 License: GPLv3+
 Group: Development/Tools
 URL: https://zealdocs.org/
-Source0: https://github.com/zealdocs/zeal/archive/v%{version}.tar.gz
+Source0: https://github.com/zealdocs/zeal/archive/zeal-%{version}.tar.gz
 BuildRequires: qt5-qtwebkit-devel libarchive-devel qt5-qtx11extras-devel xcb-util-keysyms-devel
 Requires: qt5-qtbase qt5-qtwebkit libarchive qt5-qtx11extras xcb-util-keysyms
 
