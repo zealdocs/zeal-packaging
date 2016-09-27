@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ubuntu distributions
-DISTRS=(trusty vivid wily)
+DISTRS=(trusty xenial yakkety)
 PPA="zeal-developers/ppa"
 
 function failure {
