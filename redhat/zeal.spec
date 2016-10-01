@@ -2,7 +2,7 @@
 
 Summary: Zeal: Simple offline API documentation browser
 Name: zeal
-Version: 0.2.1
+Version: 0.3.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Development/Tools
@@ -31,3 +31,6 @@ make install
 /usr/share/icons/hicolor/*/apps/zeal.png
 
 %changelog
+* Sat Oct 01 2016 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 0.3.0-1
+- update to v0.3.0
+
