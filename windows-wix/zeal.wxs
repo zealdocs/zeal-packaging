@@ -29,9 +29,10 @@
             <ComponentRef Id='imageformats' />
             <ComponentRef Id='ProgramMenuDir' />
         </Feature>
-        <Feature Id='Protocol' Title='dash:// and dash-plugin:// support' Level='1'>
-            <ComponentRef Id='ProtocolHKLM' />
-            <ComponentRef Id='ProtocolHKCU' />
+
+        <Feature Id='Protocol' Title='Plugin Support' Level='1'
+          Description='Provides dash:// and dash-plugin:// protocol handlers'>
+            <ComponentGroupRef Id='ProtocolHandlers' />
         </Feature>
 
         <Icon Id="zeal.exe" SourceFile="$(var.ZealPackageDir)\zeal.exe" />
@@ -94,6 +95,9 @@
                 </Directory>
             </Directory>
             <Directory Id="DesktopFolder" Name="Desktop" />
+        </Directory>
+
+        <ComponentGroup Id="ProtocolHandlers" Directory="TARGETDIR">
             <Component Id="ProtocolHKLM" Guid="4c104822-68d5-44b4-9a00-e5227a31c3f1">
                 <Condition>ALLUSERS</Condition>
 
@@ -107,6 +111,7 @@
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
             </Component>
+
             <Component Id="ProtocolHKCU" Guid="f0d12dff-386a-4e81-9003-e14ddba5a0a7">
                 <Condition>NOT ALLUSERS</Condition>
 
@@ -120,7 +125,8 @@
                 <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
                 <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
             </Component>
-        </Directory>
+        </ComponentGroup>
+
         <UIRef Id='WixUI_Advanced' />
         <Property Id='ApplicationFolderName' Value='Zeal' />
         <Property Id='WixAppFolder' Value='WixPerMachineFolder' />
