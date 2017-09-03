@@ -1,20 +1,29 @@
-## Instructions for building an .msi file
+## Instructions for building MSI installer.
 
-Placeholders for actual paths:
-* `%ZEAL_PKG_DIR%`
+Placeholders (or environment variables) for actual values:
 
-1. Download the [WiX Toolset](http://wixtoolset.org/) (v3.9 R2 was used when developing
-   the .wxs file for Zeal)
-2. Compile Zeal.
-3. Use `windeployqt` to get all runtime dependencies in one place:
-```
-windeployqt --dir %ZEAL_PKG_DIR%
-```
-4. In `%ZEAL_PKG_DIR%` remove all files (Qt plugins) not listed in `zeal.wxs`.
-5. Copy `bin/zeal.exe` to the deployment directory.
-6. Copy `ssleay32.dll` and `libeay32.dll` to the deployment directory.
-7. Set the environment variables:
-  * ZEAL_VERSION (for example "0.1.0")
-  * ZEAL_PKG_DIR
-8. Run `candle.exe zeal.wxs`.
-9. Run `light.exe -ext WixUIExtension zeal.wixobj`.
+* `%ZEAL_PKG_DIR%` - a path to the directory where all files should be placed before packing.
+* `%ZEAL_VERSION%` - the application version which is being packed.
+
+Requirements:
+
+* [WiX Toolset](http://wixtoolset.org/)
+
+Steps:
+
+1. Compile Zeal.
+2. Use `windeployqt` to get all runtime dependencies in one place:
+
+  ```shell
+  > windeployqt --dir %ZEAL_PKG_DIR%
+  ```
+
+3. In `%ZEAL_PKG_DIR%` remove all files (Qt plugins) not listed in `zeal.wxs`.
+4. Copy `bin/zeal.exe` to the deployment directory.
+5. Copy `ssleay32.dll` and `libeay32.dll` to the deployment directory.
+6. Run the following commands:
+
+  ```shell
+  > candle.exe -dZealVersion=%ZEAL_VERSION% -dZealPackageDir=%ZEAL_PKG_DIR% zeal.wxs
+  > light.exe -ext WixUIExtension zeal.wixobj
+  ```

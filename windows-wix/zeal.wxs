@@ -1,8 +1,17 @@
 <?xml version='1.0' encoding='windows-1252'?>
+
+<?ifndef ZealVersion ?>
+    <?error ZealVersion must be set ?>
+<?endif?>
+
+<?ifndef ZealPackageDir ?>
+    <?error ZealPackageDir must be set ?>
+<?endif?>
+
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
     <Product Name='Zeal' Id='*'
       UpgradeCode='5c4b6030-a1b4-4efe-a5af-28f6fa2e7978'
-      Language='1033' Codepage='1252' Version='$(env.ZEAL_VERSION)' Manufacturer='Zeal Developers'>
+      Language='1033' Codepage='1252' Version='$(var.ZealVersion)' Manufacturer='Zeal Developers'>
 
         <Package Id='*' Keywords='Installer' Description='Zeal Installer'
           Manufacturer='Zeal Developers'
@@ -24,7 +33,8 @@
             <ComponentRef Id='ProtocolHKLM' />
             <ComponentRef Id='ProtocolHKCU' />
         </Feature>
-        <Icon Id="zeal.exe" SourceFile="$(env.ZEAL_PKG_DIR)\zeal.exe" />
+
+        <Icon Id="zeal.exe" SourceFile="$(var.ZealPackageDir)\zeal.exe" />
         <Property Id="ARPPRODUCTICON" Value="zeal.exe" />
         <Property Id="ARPHELPLINK" Value="https://zealdocs.org" />
 
@@ -32,41 +42,41 @@
             <Directory Id='$(var.PlatformProgramFilesFolder)' Name='PFiles'>
                 <Directory Id='APPLICATIONFOLDER' Name='Zeal'>
                     <Component Id='DLLs' Guid='ea0cd148-c03e-4690-8294-7320a5279d82'>
-                        <File Id='archive' Name='archive.dll' Source='$(env.ZEAL_PKG_DIR)\archive.dll' />
-                        <File Id='sqlite3' Name='sqlite3.dll' Source='$(env.ZEAL_PKG_DIR)\sqlite3.dll' />
-                        <File Id='zlib' Name='zlib.dll' Source='$(env.ZEAL_PKG_DIR)\zlib.dll' />
+                        <File Id='archive' Name='archive.dll' Source='$(var.ZealPackageDir)\archive.dll' />
+                        <File Id='sqlite3' Name='sqlite3.dll' Source='$(var.ZealPackageDir)\sqlite3.dll' />
+                        <File Id='zlib' Name='zlib.dll' Source='$(var.ZealPackageDir)\zlib.dll' />
                         <!-- ICU -->
-                        <File Id='icudt' Name='icudt57.dll' Source='$(env.ZEAL_PKG_DIR)\icudt57.dll' />
-                        <File Id='icuin' Name='icuin57.dll' Source='$(env.ZEAL_PKG_DIR)\icuin57.dll' />
-                        <File Id='icuuc' Name='icuuc57.dll' Source='$(env.ZEAL_PKG_DIR)\icuuc57.dll' />
+                        <File Id='icudt' Name='icudt57.dll' Source='$(var.ZealPackageDir)\icudt57.dll' />
+                        <File Id='icuin' Name='icuin57.dll' Source='$(var.ZealPackageDir)\icuin57.dll' />
+                        <File Id='icuuc' Name='icuuc57.dll' Source='$(var.ZealPackageDir)\icuuc57.dll' />
                         <!-- OpenSSL -->
-                        <File Id='libeay' Name='libeay32.dll' Source='$(env.ZEAL_PKG_DIR)\libeay32.dll' />
-                        <File Id='ssleay' Name='ssleay32.dll' Source='$(env.ZEAL_PKG_DIR)\ssleay32.dll' />
+                        <File Id='libeay' Name='libeay32.dll' Source='$(var.ZealPackageDir)\libeay32.dll' />
+                        <File Id='ssleay' Name='ssleay32.dll' Source='$(var.ZealPackageDir)\ssleay32.dll' />
                         <!-- Qt -->
-                        <File Id='QtConcurrent' Name='Qt5Concurrent.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Concurrent.dll' />
-                        <File Id='QtCore' Name='Qt5Core.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Core.dll' />
-                        <File Id='QtGui' Name='Qt5Gui.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Gui.dll' />
-                        <File Id='QtNetwork' Name='Qt5Network.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Network.dll' />
-                        <File Id='QtSvg' Name='Qt5Svg.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Svg.dll' />
-                        <File Id='QtWebKit' Name='Qt5WebKit.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5WebKit.dll' />
-                        <File Id='QtWebKitWidgets' Name='Qt5WebKitWidgets.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5WebKitWidgets.dll' />
-                        <File Id='QtWidgets' Name='Qt5Widgets.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Widgets.dll' />
+                        <File Id='QtConcurrent' Name='Qt5Concurrent.dll' Source='$(var.ZealPackageDir)\Qt5Concurrent.dll' />
+                        <File Id='QtCore' Name='Qt5Core.dll' Source='$(var.ZealPackageDir)\Qt5Core.dll' />
+                        <File Id='QtGui' Name='Qt5Gui.dll' Source='$(var.ZealPackageDir)\Qt5Gui.dll' />
+                        <File Id='QtNetwork' Name='Qt5Network.dll' Source='$(var.ZealPackageDir)\Qt5Network.dll' />
+                        <File Id='QtSvg' Name='Qt5Svg.dll' Source='$(var.ZealPackageDir)\Qt5Svg.dll' />
+                        <File Id='QtWebKit' Name='Qt5WebKit.dll' Source='$(var.ZealPackageDir)\Qt5WebKit.dll' />
+                        <File Id='QtWebKitWidgets' Name='Qt5WebKitWidgets.dll' Source='$(var.ZealPackageDir)\Qt5WebKitWidgets.dll' />
+                        <File Id='QtWidgets' Name='Qt5Widgets.dll' Source='$(var.ZealPackageDir)\Qt5Widgets.dll' />
                     </Component>
                     <Directory Id='imageformats' Name='imageformats'>
                         <Component Id='imageformats' Guid='9997edc7-0b97-4b29-9cc9-76a9c3875f9d'>
-                            <File Id='if_gif' Name='qgif.dll' Source='$(env.ZEAL_PKG_DIR)\imageformats\qgif.dll' />
-                            <File Id='if_ico' Name='qico.dll' Source='$(env.ZEAL_PKG_DIR)\imageformats\qico.dll' />
-                            <File Id='if_jpeg' Name='qjpeg.dll' Source='$(env.ZEAL_PKG_DIR)\imageformats\qjpeg.dll' />
-                            <File Id='if_tiff' Name='qtiff.dll' Source='$(env.ZEAL_PKG_DIR)\imageformats\qtiff.dll' />
+                            <File Id='if_gif' Name='qgif.dll' Source='$(var.ZealPackageDir)\imageformats\qgif.dll' />
+                            <File Id='if_ico' Name='qico.dll' Source='$(var.ZealPackageDir)\imageformats\qico.dll' />
+                            <File Id='if_jpeg' Name='qjpeg.dll' Source='$(var.ZealPackageDir)\imageformats\qjpeg.dll' />
+                            <File Id='if_tiff' Name='qtiff.dll' Source='$(var.ZealPackageDir)\imageformats\qtiff.dll' />
                         </Component>
                     </Directory>
                     <Directory Id='platforms' Name='platforms'>
                         <Component Id='platforms' Guid='637c240b-a070-44c6-922d-3bca338ab00c'>
-                            <File Id='plat_windows' Name='qwindows.dll' Source='$(env.ZEAL_PKG_DIR)\platforms\qwindows.dll' />
+                            <File Id='plat_windows' Name='qwindows.dll' Source='$(var.ZealPackageDir)\platforms\qwindows.dll' />
                         </Component>
                     </Directory>
                     <Component Id='MainExecutable' Guid='872a29c2-cfc9-4657-a41a-407dc63600df'>
-                        <File Id='ZealEXE' Name='zeal.exe' Source='$(env.ZEAL_PKG_DIR)\zeal.exe' KeyPath='yes'>
+                        <File Id='ZealEXE' Name='zeal.exe' Source='$(var.ZealPackageDir)\zeal.exe' KeyPath='yes'>
                             <Shortcut Id="startmenuZeal" Directory="ProgramMenuDir" Name="Zeal"
                   WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
                             <Shortcut Id="desktopZeal" Directory="DesktopFolder" Name="Zeal"
