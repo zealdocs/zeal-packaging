@@ -18,7 +18,6 @@
             <ComponentRef Id='DLLs' />
             <ComponentRef Id='platforms' />
             <ComponentRef Id='imageformats' />
-            <ComponentRef Id='sqldrivers' />
             <ComponentRef Id='ProgramMenuDir' />
         </Feature>
         <Feature Id='Protocol' Title='dash:// and dash-plugin:// support' Level='1'>
@@ -28,36 +27,27 @@
         <Icon Id="zeal.exe" SourceFile="$(env.ZEAL_PKG_DIR)\zeal.exe" />
         <Property Id="ARPPRODUCTICON" Value="zeal.exe" />
         <Property Id="ARPHELPLINK" Value="https://zealdocs.org" />
+
         <Directory Id='TARGETDIR' Name='SourceDir'>
-            <Directory Id='ProgramFilesFolder' Name='PFiles'>
+            <Directory Id='$(var.PlatformProgramFilesFolder)' Name='PFiles'>
                 <Directory Id='APPLICATIONFOLDER' Name='Zeal'>
                     <Component Id='DLLs' Guid='ea0cd148-c03e-4690-8294-7320a5279d82'>
+                        <File Id='archive' Name='archive.dll' Source='$(env.ZEAL_PKG_DIR)\archive.dll' />
+                        <File Id='sqlite3' Name='sqlite3.dll' Source='$(env.ZEAL_PKG_DIR)\sqlite3.dll' />
+                        <File Id='zlib' Name='zlib.dll' Source='$(env.ZEAL_PKG_DIR)\zlib.dll' />
                         <!-- ICU -->
-                        <File Id='icudt' Name='icudt54.dll' Source='$(env.ZEAL_PKG_DIR)\icudt54.dll' />
-                        <File Id='icuin' Name='icuin54.dll' Source='$(env.ZEAL_PKG_DIR)\icuin54.dll' />
-                        <File Id='icuuc' Name='icuuc54.dll' Source='$(env.ZEAL_PKG_DIR)\icuuc54.dll' />
+                        <File Id='icudt' Name='icudt57.dll' Source='$(env.ZEAL_PKG_DIR)\icudt57.dll' />
+                        <File Id='icuin' Name='icuin57.dll' Source='$(env.ZEAL_PKG_DIR)\icuin57.dll' />
+                        <File Id='icuuc' Name='icuuc57.dll' Source='$(env.ZEAL_PKG_DIR)\icuuc57.dll' />
                         <!-- OpenSSL -->
                         <File Id='libeay' Name='libeay32.dll' Source='$(env.ZEAL_PKG_DIR)\libeay32.dll' />
                         <File Id='ssleay' Name='ssleay32.dll' Source='$(env.ZEAL_PKG_DIR)\ssleay32.dll' />
-                        <File Id='stdcpp' Name='libstdc++-6.dll' Source='$(env.ZEAL_PKG_DIR)\libstdc++-6.dll' />
-                        <!-- GCC and Pthread -->
-                        <File Id='gcc' Name='libgcc_s_dw2-1.dll' Source='$(env.ZEAL_PKG_DIR)\libgcc_s_dw2-1.dll' />
-                        <File Id='pthread' Name='libwinpthread-1.dll' Source='$(env.ZEAL_PKG_DIR)\libwinpthread-1.dll' />
                         <!-- Qt -->
                         <File Id='QtConcurrent' Name='Qt5Concurrent.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Concurrent.dll' />
                         <File Id='QtCore' Name='Qt5Core.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Core.dll' />
                         <File Id='QtGui' Name='Qt5Gui.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Gui.dll' />
-                        <File Id='QtMultimedia' Name='Qt5Multimedia.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Multimedia.dll' />
-                        <File Id='QtMultimediaWidgets' Name='Qt5MultimediaWidgets.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5MultimediaWidgets.dll' />
                         <File Id='QtNetwork' Name='Qt5Network.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Network.dll' />
-                        <File Id='QtOpenGL' Name='Qt5OpenGL.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5OpenGL.dll' />
-                        <File Id='QtPositioning' Name='Qt5Positioning.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Positioning.dll' />
-                        <File Id='QtPrintSupport' Name='Qt5PrintSupport.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5PrintSupport.dll' />
-                        <File Id='QtQml' Name='Qt5Qml.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Qml.dll' />
-                        <File Id='QtQuick' Name='Qt5Quick.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Quick.dll' />
-                        <File Id='QtSensors' Name='Qt5Sensors.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Sensors.dll' />
-                        <File Id='QtSql' Name='Qt5Sql.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Sql.dll' />
-                        <File Id='QtWebChannel' Name='Qt5WebChannel.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5WebChannel.dll' />
+                        <File Id='QtSvg' Name='Qt5Svg.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Svg.dll' />
                         <File Id='QtWebKit' Name='Qt5WebKit.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5WebKit.dll' />
                         <File Id='QtWebKitWidgets' Name='Qt5WebKitWidgets.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5WebKitWidgets.dll' />
                         <File Id='QtWidgets' Name='Qt5Widgets.dll' Source='$(env.ZEAL_PKG_DIR)\Qt5Widgets.dll' />
@@ -73,11 +63,6 @@
                     <Directory Id='platforms' Name='platforms'>
                         <Component Id='platforms' Guid='637c240b-a070-44c6-922d-3bca338ab00c'>
                             <File Id='plat_windows' Name='qwindows.dll' Source='$(env.ZEAL_PKG_DIR)\platforms\qwindows.dll' />
-                        </Component>
-                    </Directory>
-                    <Directory Id='sqldrivers' Name='sqldrivers'>
-                        <Component Id='sqldrivers' Guid='7a1e942f-8e32-4e40-b00c-907911a7707a'>
-                            <File Id='sql_sqlite' Name='qsqlite.dll' Source='$(env.ZEAL_PKG_DIR)\sqldrivers\qsqlite.dll' />
                         </Component>
                     </Directory>
                     <Component Id='MainExecutable' Guid='872a29c2-cfc9-4657-a41a-407dc63600df'>
