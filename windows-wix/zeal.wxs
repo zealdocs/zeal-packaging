@@ -8,14 +8,22 @@
     <?error ZealPackageDir must be set ?>
 <?endif?>
 
+<?if $(sys.BUILDARCH)="x86"?>
+    <?define PlatformProgramFilesFolder="ProgramFilesFolder" ?>
+<?elseif $(sys.BUILDARCH)="x64"?>
+    <?define PlatformProgramFilesFolder="ProgramFiles64Folder" ?>
+<?else ?>
+    <?error Unsupported value of sys.BUILDARCH=$(sys.BUILDARCH) ?>
+<?endif ?>
+
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
     <Product Name='Zeal' Id='*'
       UpgradeCode='5c4b6030-a1b4-4efe-a5af-28f6fa2e7978'
       Language='1033' Codepage='1252' Version='$(var.ZealVersion)' Manufacturer='Zeal Developers'>
 
-        <Package Id='*' Keywords='Installer' Description='Zeal Installer'
-          Manufacturer='Zeal Developers'
-          InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+        <Package Id='*' Keywords='Installer'
+          Description='Zeal Installer' Manufacturer='Zeal Developers'
+          Languages='1033' Compressed='yes' SummaryCodepage='1252' />
 
         <MajorUpgrade
           DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
@@ -136,9 +144,22 @@
         </ComponentGroup>
 
         <UIRef Id='WixUI_Advanced' />
+
         <Property Id='ApplicationFolderName' Value='Zeal' />
         <Property Id='WixAppFolder' Value='WixPerMachineFolder' />
         <Property Id='ALLUSERS' Value='1' />
         <WixVariable Id="WixUILicenseRtf" Value="COPYING.rtf" />
+
+        <!-- Fix for https://github.com/wixtoolset/issues/issues/2165 -->
+        <CustomAction Id="Overwrite_WixSetDefaultPerMachineFolder" Property="WixPerMachineFolder"
+          Value="[$(var.PlatformProgramFilesFolder)][ApplicationFolderName]" Execute="immediate" />
+        <InstallUISequence>
+            <Custom Action="Overwrite_WixSetDefaultPerMachineFolder" After="WixSetDefaultPerMachineFolder" />
+        </InstallUISequence>
+        <InstallExecuteSequence>
+            <Custom Action="Overwrite_WixSetDefaultPerMachineFolder" After="WixSetDefaultPerMachineFolder" />
+        </InstallExecuteSequence>
+
+        <SetProperty Id="ARPINSTALLLOCATION" Value="[APPLICATIONFOLDER]" After="CostFinalize" />
     </Product>
 </Wix>
