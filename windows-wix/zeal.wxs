@@ -23,10 +23,9 @@
         <MediaTemplate CompressionLevel="high" EmbedCab="yes" />
 
         <Feature Id='App' Title='Zeal' Level='1' Absent="disallow">
-            <ComponentRef Id='MainExecutable' />
-            <ComponentRef Id='DLLs' />
-            <ComponentRef Id='platforms' />
-            <ComponentRef Id='imageformats' />
+            <ComponentGroupRef Id='Binaries' />
+            <ComponentGroupRef Id='Binaries_Imageformats' />
+            <ComponentGroupRef Id='Binaries_Platforms' />
             <ComponentRef Id='ProgramMenuDir' />
         </Feature>
 
@@ -39,63 +38,73 @@
         <Property Id="ARPPRODUCTICON" Value="zeal.exe" />
         <Property Id="ARPHELPLINK" Value="https://zealdocs.org" />
 
-        <Directory Id='TARGETDIR' Name='SourceDir'>
-            <Directory Id='$(var.PlatformProgramFilesFolder)' Name='PFiles'>
-                <Directory Id='APPLICATIONFOLDER' Name='Zeal' FileSource='$(var.ZealPackageDir)'>
-                    <Component Id='DLLs' Guid='ea0cd148-c03e-4690-8294-7320a5279d82'>
-                        <File Name='archive.dll' />
-                        <File Name='sqlite3.dll' />
-                        <File Name='zlib.dll' />
-                        <!-- ICU -->
-                        <File Name='icudt57.dll' />
-                        <File Name='icuin57.dll' />
-                        <File Name='icuuc57.dll' />
-                        <!-- OpenSSL -->
-                        <File Name='libeay32.dll' />
-                        <File Name='ssleay32.dll' />
-                        <!-- Qt -->
-                        <File Name='Qt5Concurrent.dll' />
-                        <File Name='Qt5Core.dll' />
-                        <File Name='Qt5Gui.dll' />
-                        <File Name='Qt5Network.dll' />
-                        <File Name='Qt5Svg.dll' />
-                        <File Name='Qt5WebKit.dll' />
-                        <File Name='Qt5WebKitWidgets.dll' />
-                        <File Name='Qt5Widgets.dll' />
-                    </Component>
-                    <Directory Id='imageformats' Name='imageformats' FileSource='$(var.ZealPackageDir)\imageformats'>
-                        <Component Id='imageformats' Guid='9997edc7-0b97-4b29-9cc9-76a9c3875f9d'>
-                            <File Name='qgif.dll' />
-                            <File Name='qico.dll' />
-                            <File Name='qjpeg.dll' />
-                            <File Name='qtiff.dll' />
-                        </Component>
-                    </Directory>
-                    <Directory Id='platforms' Name='platforms' FileSource='$(var.ZealPackageDir)\platforms'>
-                        <Component Id='platforms' Guid='637c240b-a070-44c6-922d-3bca338ab00c'>
-                            <File Name='qwindows.dll' />
-                        </Component>
-                    </Directory>
-                    <Component Id='MainExecutable' Guid='872a29c2-cfc9-4657-a41a-407dc63600df'>
-                        <File Name='zeal.exe' KeyPath='yes'>
-                            <Shortcut Id="startmenuZeal" Directory="ProgramMenuDir" Name="Zeal"
-                  WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
-                            <Shortcut Id="desktopZeal" Directory="DesktopFolder" Name="Zeal"
-                  WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
-                        </File>
-                    </Component>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="$(var.PlatformProgramFilesFolder)">
+                <Directory Id="APPLICATIONFOLDER" Name="Zeal">
+                    <Directory Id='APPLICATIONFOLDER_IMAGEFORMATS' Name='imageformats' />
+                    <Directory Id='APPLICATIONFOLDER_PLATFORMS' Name='platforms' />
                 </Directory>
             </Directory>
+
             <Directory Id="ProgramMenuFolder" Name="Programs">
-                <Directory Id="ProgramMenuDir" Name="Zeal">
-                    <Component Id="ProgramMenuDir" Guid="6d2053d4-6231-4fba-a038-a32b19cec1b7">
-                        <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
-                        <RegistryValue Root='HKCU' Key='Software\Zeal\Zeal' Type='string' Value='' KeyPath='yes' />
-                    </Component>
-                </Directory>
+                <Directory Id="ProgramMenuDir" Name="Zeal" />
             </Directory>
+
             <Directory Id="DesktopFolder" Name="Desktop" />
         </Directory>
+
+        <ComponentGroup Id="Binaries" Directory="APPLICATIONFOLDER" Source='$(var.ZealPackageDir)'>
+            <Component Id='DLLs' Guid='ea0cd148-c03e-4690-8294-7320a5279d82'>
+                <File Name='archive.dll' />
+                <File Name='sqlite3.dll' />
+                <File Name='zlib.dll' />
+                <!-- ICU -->
+                <File Name='icudt57.dll' />
+                <File Name='icuin57.dll' />
+                <File Name='icuuc57.dll' />
+                <!-- OpenSSL -->
+                <File Name='libeay32.dll' />
+                <File Name='ssleay32.dll' />
+                <!-- Qt -->
+                <File Name='Qt5Concurrent.dll' />
+                <File Name='Qt5Core.dll' />
+                <File Name='Qt5Gui.dll' />
+                <File Name='Qt5Network.dll' />
+                <File Name='Qt5Svg.dll' />
+                <File Name='Qt5WebKit.dll' />
+                <File Name='Qt5WebKitWidgets.dll' />
+                <File Name='Qt5Widgets.dll' />
+            </Component>
+
+            <Component Id='MainExecutable' Guid='872a29c2-cfc9-4657-a41a-407dc63600df'>
+                <File Name='zeal.exe' KeyPath='yes'>
+                    <Shortcut Id="startmenuZeal" Directory="ProgramMenuDir" Name="Zeal"
+                        WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
+                    <Shortcut Id="desktopZeal" Directory="DesktopFolder" Name="Zeal"
+                        WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
+                </File>
+            </Component>
+        </ComponentGroup>
+
+        <ComponentGroup Id="Binaries_Imageformats" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.ZealPackageDir)\imageformats'>
+            <Component Id='imageformats' Guid='9997edc7-0b97-4b29-9cc9-76a9c3875f9d'>
+                <File Name='qgif.dll' />
+                <File Name='qico.dll' />
+                <File Name='qjpeg.dll' />
+                <File Name='qtiff.dll' />
+            </Component>
+        </ComponentGroup>
+
+        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.ZealPackageDir)\platforms'>
+            <Component Id='platforms' Guid='637c240b-a070-44c6-922d-3bca338ab00c'>
+                <File Name='qwindows.dll' />
+            </Component>
+        </ComponentGroup>
+
+        <Component Id="ProgramMenuDir" Guid="6d2053d4-6231-4fba-a038-a32b19cec1b7" Directory="ProgramMenuDir">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\Zeal\Zeal' Type='string' Value='' KeyPath='yes' />
+        </Component>
 
         <ComponentGroup Id="ProtocolHandlers" Directory="TARGETDIR">
             <Component Id="ProtocolHKLM" Guid="4c104822-68d5-44b4-9a00-e5227a31c3f1">
