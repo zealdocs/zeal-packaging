@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='windows-1252'?>
 
-<?ifndef ZealVersion ?>
-    <?error ZealVersion must be set ?>
+<?ifndef AppVersion ?>
+    <?error AppVersion must be set ?>
 <?endif?>
 
-<?ifndef ZealPackageDir ?>
-    <?error ZealPackageDir must be set ?>
+<?ifndef AppPackageDir ?>
+    <?error AppPackageDir must be set ?>
 <?endif?>
+
+<?define AppName="Zeal" ?>
+<?define AppManufacturer="Oleg Shparber" ?>
+<?define AppExeName="zeal.exe" ?>
 
 <?if $(sys.BUILDARCH)="x86"?>
     <?define PlatformProgramFilesFolder="ProgramFilesFolder" ?>
@@ -17,12 +21,12 @@
 <?endif ?>
 
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-    <Product Name='Zeal' Id='*'
+    <Product Id='*' Name='$(var.AppName) $(var.AppVersion)' Version='$(var.AppVersion)'
+      Manufacturer='$(var.AppManufacturer)'
       UpgradeCode='5c4b6030-a1b4-4efe-a5af-28f6fa2e7978'
-      Language='1033' Codepage='1252' Version='$(var.ZealVersion)' Manufacturer='Zeal Developers'>
+      Language='1033' Codepage='1252'>
 
-        <Package Id='*' Keywords='Installer'
-          Description='Zeal Installer' Manufacturer='Zeal Developers'
+        <Package Id='*' Description='$(var.AppName) $(var.AppVersion) Installer'
           Languages='1033' Compressed='yes' SummaryCodepage='1252' />
 
         <MajorUpgrade
@@ -30,6 +34,11 @@
 
         <MediaTemplate CompressionLevel="high" EmbedCab="yes" />
 
+        <Icon Id="$(var.AppExeName)" SourceFile="$(var.AppPackageDir)\$(var.AppExeName)" />
+        <Property Id="ARPPRODUCTICON" Value="$(var.AppExeName)" />
+        <Property Id="ARPHELPLINK" Value="https://zealdocs.org" />
+
+        <!-- Features -->
         <Feature Id='App' Title='Zeal' Level='1' Absent="disallow">
             <ComponentGroupRef Id='Binaries' />
             <ComponentGroupRef Id='Binaries_Imageformats' />
@@ -38,32 +47,28 @@
         </Feature>
 
         <Feature Id='Protocol' Title='Plugin Support' Level='1'
-          Description='Provides dash:// and dash-plugin:// protocol handlers'>
+          Description='Provides dash:// and dash-plugin:// protocol handlers.'>
             <ComponentGroupRef Id='ProtocolHandlers' />
         </Feature>
 
         <!-- Directory Structure -->
-        <Icon Id="zeal.exe" SourceFile="$(var.ZealPackageDir)\zeal.exe" />
-        <Property Id="ARPPRODUCTICON" Value="zeal.exe" />
-        <Property Id="ARPHELPLINK" Value="https://zealdocs.org" />
-
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="$(var.PlatformProgramFilesFolder)">
-                <Directory Id="APPLICATIONFOLDER" Name="Zeal">
+                <Directory Id="APPLICATIONFOLDER" Name="$(var.AppName)">
                     <Directory Id='APPLICATIONFOLDER_IMAGEFORMATS' Name='imageformats' />
                     <Directory Id='APPLICATIONFOLDER_PLATFORMS' Name='platforms' />
                 </Directory>
             </Directory>
 
             <Directory Id="ProgramMenuFolder">
-                <Directory Id="ProgramMenuDir" Name="Zeal" />
+                <Directory Id="ProgramMenuDir" Name="$(var.AppName)" />
             </Directory>
 
             <Directory Id="DesktopFolder" />
         </Directory>
 
         <!-- Components -->
-        <ComponentGroup Id="Binaries" Directory="APPLICATIONFOLDER" Source='$(var.ZealPackageDir)'>
+        <ComponentGroup Id="Binaries" Directory="APPLICATIONFOLDER" Source='$(var.AppPackageDir)'>
             <Component><File Name='archive.dll' Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name='sqlite3.dll' Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name='zlib.dll' Checksum="yes" KeyPath="yes" /></Component>
@@ -88,23 +93,23 @@
             <Component><File Name='Qt5Widgets.dll' Checksum="yes" KeyPath="yes" /></Component>
 
             <Component>
-                <File Name='zeal.exe' Checksum="yes" KeyPath='yes'>
-                    <Shortcut Id="startmenuZeal" Directory="ProgramMenuDir" Name="Zeal"
-                        WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
-                    <Shortcut Id="desktopZeal" Directory="DesktopFolder" Name="Zeal"
-                        WorkingDirectory='APPLICATIONFOLDER' Icon="zeal.exe" IconIndex="0" Advertise="yes" />
+                <File Name='$(var.AppExeName)' Checksum="yes" KeyPath='yes'>
+                    <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuDir" Name="$(var.AppName)"
+                        WorkingDirectory='APPLICATIONFOLDER' Icon="$(var.AppExeName)" IconIndex="0" Advertise="yes" />
+                    <Shortcut Id="DesktopShortcut" Directory="DesktopFolder" Name="$(var.AppName)"
+                        WorkingDirectory='APPLICATIONFOLDER' Icon="$(var.AppExeName)" IconIndex="0" Advertise="yes" />
                 </File>
             </Component>
         </ComponentGroup>
 
-        <ComponentGroup Id="Binaries_Imageformats" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.ZealPackageDir)\imageformats'>
+        <ComponentGroup Id="Binaries_Imageformats" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.AppPackageDir)\imageformats'>
             <Component><File Name='qgif.dll' Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name='qico.dll' Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name='qjpeg.dll' Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name='qtiff.dll' Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
-        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.ZealPackageDir)\platforms'>
+        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.AppPackageDir)\platforms'>
             <Component><File Name='qwindows.dll' Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
@@ -145,7 +150,7 @@
 
         <UIRef Id='WixUI_Advanced' />
 
-        <Property Id='ApplicationFolderName' Value='Zeal' />
+        <Property Id='ApplicationFolderName' Value='$(var.AppName)' />
         <Property Id='WixAppFolder' Value='WixPerMachineFolder' />
         <Property Id='ALLUSERS' Value='1' />
         <WixVariable Id="WixUILicenseRtf" Value="COPYING.rtf" />

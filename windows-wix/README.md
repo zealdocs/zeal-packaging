@@ -24,6 +24,6 @@ Steps:
 6. Run the following commands:
 
   ```shell
-  > candle.exe -dZealVersion=%ZEAL_VERSION% -dZealPackageDir=%ZEAL_PKG_DIR% zeal.wxs
+  > candle.exe -dAppVersion=%ZEAL_VERSION% -dAppPackageDir=%ZEAL_PKG_DIR% zeal.wxs
   > light.exe -ext WixUIExtension zeal.wixobj
   ```
