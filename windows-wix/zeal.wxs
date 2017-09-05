@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='windows-1252'?>
+<?xml version="1.0" encoding="windows-1252"?>
 
 <?ifndef AppVersion ?>
     <?error AppVersion must be set ?>
@@ -22,13 +22,13 @@
     <?error Unsupported value of sys.BUILDARCH=$(sys.BUILDARCH) ?>
 <?endif ?>
 
-<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-    <Product Id='*' Name='$(var.AppName) $(var.AppVersion)' Version='$(var.AppVersion)'
-      Manufacturer='$(var.AppManufacturer)' UpgradeCode='$(var.UpgradeCode)'
-      Language='1033' Codepage='1252'>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" Name="$(var.AppName) $(var.AppVersion)" Version="$(var.AppVersion)"
+      Manufacturer="$(var.AppManufacturer)" UpgradeCode="$(var.UpgradeCode)"
+      Language="1033" Codepage="1252">
 
-        <Package Id='*' Description='$(var.AppName) $(var.AppVersion) Installer'
-          Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+        <Package Id="*" Description="$(var.AppName) $(var.AppVersion) Installer"
+          Languages="1033" Compressed="yes" SummaryCodepage="1252" />
 
         <MajorUpgrade
           DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
@@ -40,24 +40,24 @@
         <Property Id="ARPHELPLINK" Value="https://zealdocs.org" />
 
         <!-- Features -->
-        <Feature Id='App' Title='Zeal' Level='1' Absent="disallow">
-            <ComponentGroupRef Id='Binaries' />
-            <ComponentGroupRef Id='Binaries_Imageformats' />
-            <ComponentGroupRef Id='Binaries_Platforms' />
-            <ComponentRef Id='ProgramMenuDir' />
+        <Feature Id="App" Title="Zeal" Level="1" Absent="disallow">
+            <ComponentGroupRef Id="Binaries" />
+            <ComponentGroupRef Id="Binaries_Imageformats" />
+            <ComponentGroupRef Id="Binaries_Platforms" />
+            <ComponentRef Id="ProgramMenuDir" />
         </Feature>
 
-        <Feature Id='Protocol' Title='Plugin Support' Level='1'
-          Description='Provides dash:// and dash-plugin:// protocol handlers.'>
-            <ComponentGroupRef Id='ProtocolHandlers' />
+        <Feature Id="Protocol" Title="Plugin Support" Level="1"
+          Description="Provides dash:// and dash-plugin:// protocol handlers.">
+            <ComponentGroupRef Id="ProtocolHandlers" />
         </Feature>
 
         <!-- Directory Structure -->
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="$(var.PlatformProgramFilesFolder)">
                 <Directory Id="APPLICATIONFOLDER" Name="$(var.AppName)">
-                    <Directory Id='APPLICATIONFOLDER_IMAGEFORMATS' Name='imageformats' />
-                    <Directory Id='APPLICATIONFOLDER_PLATFORMS' Name='platforms' />
+                    <Directory Id="APPLICATIONFOLDER_IMAGEFORMATS" Name="imageformats" />
+                    <Directory Id="APPLICATIONFOLDER_PLATFORMS" Name="platforms" />
                 </Directory>
             </Directory>
 
@@ -69,91 +69,91 @@
         </Directory>
 
         <!-- Components -->
-        <ComponentGroup Id="Binaries" Directory="APPLICATIONFOLDER" Source='$(var.AppPackageDir)'>
-            <Component><File Name='archive.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='sqlite3.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='zlib.dll' Checksum="yes" KeyPath="yes" /></Component>
+        <ComponentGroup Id="Binaries" Directory="APPLICATIONFOLDER" Source="$(var.AppPackageDir)">
+            <Component><File Name="archive.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="sqlite3.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="zlib.dll" Checksum="yes" KeyPath="yes" /></Component>
 
             <!-- ICU -->
-            <Component><File Name='icudt57.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='icuin57.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='icuuc57.dll' Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="icudt57.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="icuin57.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="icuuc57.dll" Checksum="yes" KeyPath="yes" /></Component>
 
             <!-- OpenSSL -->
-            <Component><File Name='libeay32.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='ssleay32.dll' Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="libeay32.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="ssleay32.dll" Checksum="yes" KeyPath="yes" /></Component>
 
             <!-- Qt -->
-            <Component><File Name='Qt5Concurrent.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5Core.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5Gui.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5Network.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5Svg.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5WebKit.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5WebKitWidgets.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='Qt5Widgets.dll' Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5Concurrent.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5Core.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5Gui.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5Network.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5Svg.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5WebKit.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5WebKitWidgets.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="Qt5Widgets.dll" Checksum="yes" KeyPath="yes" /></Component>
 
             <Component>
-                <File Name='$(var.AppExeName)' Checksum="yes" KeyPath='yes'>
+                <File Name="$(var.AppExeName)" Checksum="yes" KeyPath="yes">
                     <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuDir" Name="$(var.AppName)"
-                        WorkingDirectory='APPLICATIONFOLDER' Icon="$(var.AppExeName)" IconIndex="0" Advertise="yes" />
+                        WorkingDirectory="APPLICATIONFOLDER" Icon="$(var.AppExeName)" IconIndex="0" Advertise="yes" />
                     <Shortcut Id="DesktopShortcut" Directory="DesktopFolder" Name="$(var.AppName)"
-                        WorkingDirectory='APPLICATIONFOLDER' Icon="$(var.AppExeName)" IconIndex="0" Advertise="yes" />
+                        WorkingDirectory="APPLICATIONFOLDER" Icon="$(var.AppExeName)" IconIndex="0" Advertise="yes" />
                 </File>
             </Component>
         </ComponentGroup>
 
-        <ComponentGroup Id="Binaries_Imageformats" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.AppPackageDir)\imageformats'>
-            <Component><File Name='qgif.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='qico.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='qjpeg.dll' Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name='qtiff.dll' Checksum="yes" KeyPath="yes" /></Component>
+        <ComponentGroup Id="Binaries_Imageformats" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source="$(var.AppPackageDir)\imageformats">
+            <Component><File Name="qgif.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="qico.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="qjpeg.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="qtiff.dll" Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
-        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_PLATFORMS" Source='$(var.AppPackageDir)\platforms'>
-            <Component><File Name='qwindows.dll' Checksum="yes" KeyPath="yes" /></Component>
+        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_PLATFORMS" Source="$(var.AppPackageDir)\platforms">
+            <Component><File Name="qwindows.dll" Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
         <Component Id="ProgramMenuDir" Directory="ProgramMenuDir">
-            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
-            <RegistryValue Root='HKCU' Key='Software\Zeal\Zeal' Type='string' Value='' KeyPath='yes' />
+            <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+            <RegistryValue Root="HKCU" Key="Software\Zeal\Zeal" Type="string" Value="" KeyPath="yes" />
         </Component>
 
         <ComponentGroup Id="ProtocolHandlers" Directory="TARGETDIR">
             <Component Id="ProtocolHKLM">
                 <Condition>ALLUSERS</Condition>
 
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Type='string' Value='Zeal Search (Dash Protocol)' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type='string' Value='' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Type="string" Value="Zeal Search (Dash Protocol)" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type="string" Value="" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
 
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Type='string' Value='Zeal Search (Dash Protocol)' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type='string' Value='' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Type="string" Value="Zeal Search (Dash Protocol)" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type="string" Value="" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
             </Component>
 
             <Component>
                 <Condition>NOT ALLUSERS</Condition>
 
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Type='string' Value='Zeal Search (Dash Protocol)' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type='string' Value='' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Type="string" Value="Zeal Search (Dash Protocol)" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type="string" Value="" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
 
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Type='string' Value='Zeal Search (Dash Protocol)' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type='string' Value='' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe" "%1"' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type='string' Value='"[APPLICATIONFOLDER]zeal.exe,1"' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Type="string" Value="Zeal Search (Dash Protocol)" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type="string" Value="" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
             </Component>
         </ComponentGroup>
 
-        <UIRef Id='WixUI_Advanced' />
+        <UIRef Id="WixUI_Advanced" />
 
-        <Property Id='ApplicationFolderName' Value='$(var.AppName)' />
-        <Property Id='WixAppFolder' Value='WixPerMachineFolder' />
-        <Property Id='ALLUSERS' Value='1' />
+        <Property Id="ApplicationFolderName" Value="$(var.AppName)" />
+        <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+        <Property Id="ALLUSERS" Value="1" />
         <WixVariable Id="WixUILicenseRtf" Value="COPYING.rtf" />
 
         <!-- Fix for https://github.com/wixtoolset/issues/issues/2165 -->
