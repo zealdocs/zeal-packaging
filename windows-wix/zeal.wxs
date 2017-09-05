@@ -12,6 +12,8 @@
 <?define AppManufacturer="Oleg Shparber" ?>
 <?define AppExeName="zeal.exe" ?>
 
+<?define UpgradeCode="5C4B6030-A1B4-4EFE-A5AF-28F6FA2E7978" ?>
+
 <?if $(sys.BUILDARCH)="x86"?>
     <?define PlatformProgramFilesFolder="ProgramFilesFolder" ?>
 <?elseif $(sys.BUILDARCH)="x64"?>
@@ -22,8 +24,7 @@
 
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
     <Product Id='*' Name='$(var.AppName) $(var.AppVersion)' Version='$(var.AppVersion)'
-      Manufacturer='$(var.AppManufacturer)'
-      UpgradeCode='5c4b6030-a1b4-4efe-a5af-28f6fa2e7978'
+      Manufacturer='$(var.AppManufacturer)' UpgradeCode='$(var.UpgradeCode)'
       Language='1033' Codepage='1252'>
 
         <Package Id='*' Description='$(var.AppName) $(var.AppVersion) Installer'
@@ -113,13 +114,13 @@
             <Component><File Name='qwindows.dll' Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
-        <Component Id="ProgramMenuDir" Guid="6d2053d4-6231-4fba-a038-a32b19cec1b7" Directory="ProgramMenuDir">
+        <Component Id="ProgramMenuDir" Directory="ProgramMenuDir">
             <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
             <RegistryValue Root='HKCU' Key='Software\Zeal\Zeal' Type='string' Value='' KeyPath='yes' />
         </Component>
 
         <ComponentGroup Id="ProtocolHandlers" Directory="TARGETDIR">
-            <Component Id="ProtocolHKLM" Guid="4c104822-68d5-44b4-9a00-e5227a31c3f1">
+            <Component Id="ProtocolHKLM">
                 <Condition>ALLUSERS</Condition>
 
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Type='string' Value='Zeal Search (Dash Protocol)' />
