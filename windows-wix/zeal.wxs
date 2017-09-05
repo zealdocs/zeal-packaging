@@ -110,7 +110,7 @@
             <Component><File Name='qtiff.dll' Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
-        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_IMAGEFORMATS" Source='$(var.AppPackageDir)\platforms'>
+        <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_PLATFORMS" Source='$(var.AppPackageDir)\platforms'>
             <Component><File Name='qwindows.dll' Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
