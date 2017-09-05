@@ -119,19 +119,20 @@
             <RegistryValue Root="HKCU" Key="Software\Zeal\Zeal" Type="string" Value="" KeyPath="yes" />
         </Component>
 
+        <SetProperty Id="AppExePath" Value="[APPLICATIONFOLDER]$(var.AppExeName)" Before="CostFinalize" />
         <ComponentGroup Id="ProtocolHandlers" Directory="TARGETDIR">
-            <Component Id="ProtocolHKLM">
+            <Component>
                 <Condition>ALLUSERS</Condition>
 
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Type="string" Value="Zeal Search (Dash Protocol)" />
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
 
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Type="string" Value="Zeal Search (Dash Protocol)" />
                 <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
+                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
             </Component>
 
             <Component>
@@ -139,13 +140,13 @@
 
                 <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Type="string" Value="Zeal Search (Dash Protocol)" />
                 <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
 
                 <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Type="string" Value="Zeal Search (Dash Protocol)" />
                 <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe" "%1"" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value=""[APPLICATIONFOLDER]zeal.exe,1"" />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
+                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
             </Component>
         </ComponentGroup>
 
