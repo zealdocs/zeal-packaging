@@ -23,11 +23,11 @@ $BaseFilename = "zeal-$Version-windows-$Arch"
 $WixobjFilename = "$BaseFilename.wixobj"
 $MsiFilename = "$BaseFilename.msi"
 function CleanUp {
-    Remove-Item -Path "$WixobjFilename"
+    Remove-Item -ErrorAction Ignore -Path "$WixobjFilename"
 
     # We are not going to build patches for now.
     # More infor about wixpdb: https://www.firegiant.com/wix/tutorial/upgrades-and-modularization/patchwork/
-    Remove-Item -Path "$BaseFilename.wixpdb"
+    Remove-Item -ErrorAction Ignore "$BaseFilename.wixpdb"
 }
 
 Write-Output "Building $MsiFilename..."
