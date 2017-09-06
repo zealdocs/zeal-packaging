@@ -51,7 +51,7 @@
 
         <Feature Id="Protocol" Title="Plugin Support" Level="1"
           Description="Provides dash:// and dash-plugin:// protocol handlers.">
-            <ComponentGroupRef Id="ProtocolHandlers" />
+            <ComponentRef Id="ProtocolHandlers" />
         </Feature>
 
         <!-- Directory Structure -->
@@ -122,35 +122,22 @@
         </Component>
 
         <SetProperty Id="AppExePath" Value="[APPLICATIONFOLDER]$(var.AppExeName)" Before="CostFinalize" />
-        <ComponentGroup Id="ProtocolHandlers" Directory="TARGETDIR">
-            <Component>
-                <Condition>ALLUSERS</Condition>
+        <Component Id="ProtocolHandlers" Directory="TARGETDIR">
+            <?foreach UrlScheme in dash;dash-plugin ?>
+            <RegistryKey Root="HKMU" Key="Software\Classes\$(var.UrlScheme)">
+                <RegistryValue Type="string" Value="URL: Dash Plugin Protocol (Zeal)" />
+                <RegistryValue Name="URL Protocol" Type="string" Value="" />
 
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Type="string" Value="Zeal Search (Dash Protocol)" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
+                <RegistryKey Key="DefaultIcon">
+                    <RegistryValue Type="string" Value="&quot;[AppExePath],1&quot;" />
+                </RegistryKey>
 
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Type="string" Value="Zeal Search (Dash Protocol)" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
-                <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
-            </Component>
-
-            <Component>
-                <Condition>NOT ALLUSERS</Condition>
-
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Type="string" Value="Zeal Search (Dash Protocol)" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
-
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Type="string" Value="Zeal Search (Dash Protocol)" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin" Name="URL Protocol" Type="string" Value="" />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\shell\open\command" Type="string" Value='"[AppExePath]" "%1"' />
-                <RegistryValue Root="HKCU" Key="SOFTWARE\Classes\dash-plugin\DefaultIcon" Type="string" Value='"[AppExePath],1"' />
-            </Component>
-        </ComponentGroup>
+                <RegistryKey Key="shell\open\command">
+                    <RegistryValue Type="string" Value="&quot;[AppExePath]&quot; &quot;%1&quot;" />
+                </RegistryKey>
+            </RegistryKey>
+            <?endforeach ?>
+        </Component>
 
         <UIRef Id="WixUI_Advanced" />
 
