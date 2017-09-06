@@ -42,7 +42,8 @@
         <Property Id="ARPURLUPDATEINFO" Value="https://go.zealdocs.org/r/v$(var.AppVersion)" />
 
         <!-- Features -->
-        <Feature Id="App" Title="Zeal" Level="1" Absent="disallow">
+        <Feature Id="App" Title="$(var.AppName)" Level="1" Absent="disallow"
+          Description="Provides $(var.AppName) executable.">
             <ComponentGroupRef Id="Binaries" />
             <ComponentGroupRef Id="Binaries_Imageformats" />
             <ComponentGroupRef Id="Binaries_Platforms" />
