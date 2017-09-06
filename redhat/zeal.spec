@@ -4,12 +4,12 @@
 Summary: Zeal: Simple offline API documentation browser
 Name: zeal
 Version: 0.4.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3+
 Group: Development/Tools
 URL: https://zealdocs.org/
 Source0: https://github.com/zealdocs/zeal/archive/v%{version}.tar.gz
-BuildRequires: make gcc-c++
+BuildRequires: make gcc-c++ cmake extra-cmake-modules
 BuildRequires: qt5-qtwebkit-devel libarchive-devel qt5-qtx11extras-devel
 BuildRequires: xcb-util-keysyms-devel sqlite-devel
 Requires: qt5-qtbase qt5-qtwebkit libarchive qt5-qtx11extras
@@ -22,12 +22,14 @@ Zeal is a simple offline documentation browser inspired by Dash.
 %autosetup
 
 %build
-qmake-qt5
+%cmake .
 make %{?_smp_mflags}
 
 %install
-export INSTALL_ROOT=%{buildroot}
-make install
+make install DESTDIR=%{buildroot}
+
+%check
+ctest -V %{?_smp_mflags}
 
 %files
 /usr/bin/zeal
@@ -35,6 +37,9 @@ make install
 /usr/share/icons/hicolor/*/apps/zeal.png
 
 %changelog
+* Wed Sep 06 2017 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 0.4.0-2
+- move to using cmake and checks
+
 * Mon Sep 04 2017 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 0.4.0-1
 - update to v0.4.0 and add sqlite dependency
 
