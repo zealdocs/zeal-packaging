@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ubuntu distributions
-DISTRS=(xenial zesty)
+DISTRS=(xenial zesty artful)
 PPA="zeal-developers/ppa"
 
 function failure {
