@@ -91,7 +91,6 @@
             <Component><File Name="Qt5Core.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="Qt5Gui.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="Qt5Network.dll" Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name="Qt5Svg.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="Qt5WebKit.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="Qt5WebKitWidgets.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="Qt5Widgets.dll" Checksum="yes" KeyPath="yes" /></Component>
@@ -110,7 +109,6 @@
             <Component><File Name="qgif.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="qico.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="qjpeg.dll" Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name="qtiff.dll" Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
         <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_PLATFORMS" Source="$(var.AppPackageDir)\platforms">
