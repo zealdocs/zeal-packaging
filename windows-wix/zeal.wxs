@@ -75,7 +75,7 @@
         <ComponentGroup Id="Binaries" Directory="APPLICATIONFOLDER" Source="$(var.AppPackageDir)">
             <Component><File Name="archive.dll" Checksum="yes" KeyPath="yes" /></Component>
             <Component><File Name="sqlite3.dll" Checksum="yes" KeyPath="yes" /></Component>
-            <Component><File Name="zlib.dll" Checksum="yes" KeyPath="yes" /></Component>
+            <Component><File Name="zlib1.dll" Checksum="yes" KeyPath="yes" /></Component>
 
             <!-- ICU -->
             <Component><File Name="icudt57.dll" Checksum="yes" KeyPath="yes" /></Component>
