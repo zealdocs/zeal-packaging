@@ -3,19 +3,18 @@
 
 Summary: Zeal: Simple offline API documentation browser
 Name: zeal
-Version: 0.4.0
-Release: 3%{?dist}
+Version: 0.5.0
+Release: 1%{?dist}
 License: GPLv3+
 Group: Development/Tools
 URL: https://zealdocs.org/
 Source0: https://github.com/zealdocs/zeal/archive/v%{version}.tar.gz
-%{?fedora:BuildRequires: cmake}
-%{?rhel:BuildRequires: cmake3 cmake3-data}
-BuildRequires: make gcc-c++ extra-cmake-modules
-BuildRequires: qt5-qtwebkit-devel libarchive-devel qt5-qtx11extras-devel
+BuildRequires: make gcc-c++
+BuildRequires: desktop-file-utils
+BuildRequires: libarchive-devel
+BuildRequires: qt5-qtbase qt5-qtbase-devel qt5-qtwebkit-devel qt5-qtx11extras-devel
 BuildRequires: xcb-util-keysyms-devel sqlite-devel
-Requires: qt5-qtbase qt5-qtwebkit libarchive qt5-qtx11extras
-Requires: xcb-util-keysyms sqlite-libs
+Requires: hicolor-icon-theme
 
 %description
 Zeal is a simple offline documentation browser inspired by Dash.
@@ -24,22 +23,37 @@ Zeal is a simple offline documentation browser inspired by Dash.
 %autosetup
 
 %build
-%{?fedora:%cmake .}
-%{?rhel:%cmake3 .}
+%{qmake_qt5} zeal.pro
 make %{?_smp_mflags}
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install INSTALL_ROOT=%{buildroot}
+desktop-file-validate %{buildroot}/%{_datadir}/applications/zeal.desktop
 
-%check
-ctest -V %{?_smp_mflags}
+%post
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+
+%postun
+if [ $1 -eq 0 ] ; then
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+%posttrans
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
-/usr/bin/zeal
-/usr/share/applications/zeal.desktop
-/usr/share/icons/hicolor/*/apps/zeal.png
+%license COPYING
+%doc README.md
+%{_bindir}/zeal
+%{_datadir}/applications/zeal.desktop
+%{_datadir}/icons/hicolor/*/apps/zeal.png
 
 %changelog
+* Tue Dec 19 2017 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 0.5.0-1
+- update to v0.5.0
+- align to fedora project maintained rpm specfile (use qmake_qt5 macro)
+
 * Mon Dec 18 2017 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 0.4.0-3
 - Support CMake 3 builds for CentOS/RHEL distros
 
