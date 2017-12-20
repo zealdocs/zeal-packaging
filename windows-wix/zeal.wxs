@@ -120,7 +120,7 @@
             <RegistryValue Root="HKCU" Key="Software\Zeal\Zeal" Type="string" Value="" KeyPath="yes" />
         </Component>
 
-        <SetProperty Id="AppExePath" Value="[APPLICATIONFOLDER]$(var.AppExeName)" Before="CostFinalize" />
+        <SetProperty Id="AppExePath" Value="[APPLICATIONFOLDER]$(var.AppExeName)" After="CostFinalize" />
         <Component Id="ProtocolHandlers" Directory="TARGETDIR">
             <?foreach UrlScheme in dash;dash-plugin ?>
             <RegistryKey Root="HKMU" Key="Software\Classes\$(var.UrlScheme)">
