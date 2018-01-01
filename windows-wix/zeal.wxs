@@ -33,6 +33,12 @@
         <MajorUpgrade
           DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 
+        <Upgrade Id="$(var.UpgradeCode)">
+            <UpgradeVersion Minimum="$(var.AppVersion)" IncludeMinimum="yes"
+              Maximum="$(var.AppVersion)" IncludeMaximum="yes"
+              OnlyDetect="yes" Property="CURRENTVERSIONDETECTED" />
+        </Upgrade>
+
         <MediaTemplate CompressionLevel="high" EmbedCab="yes" />
 
         <Icon Id="$(var.AppExeName)" SourceFile="$(var.AppPackageDir)\$(var.AppExeName)" />
@@ -145,12 +151,18 @@
         <Property Id="ALLUSERS" Value="1" />
         <WixVariable Id="WixUILicenseRtf" Value="COPYING.rtf" />
 
+        <CustomAction Id="AlreadyInstalled"
+          Error="A different build of $(var.AppName) version $(var.AppVersion) is already installed. Same version upgrades are not supported. Please remove the currently installed version first." />
+
         <!-- Fix for https://github.com/wixtoolset/issues/issues/2165 -->
         <CustomAction Id="Overwrite_WixSetDefaultPerMachineFolder" Property="WixPerMachineFolder"
           Value="[$(var.PlatformProgramFilesFolder)][ApplicationFolderName]" Execute="immediate" />
+
         <InstallUISequence>
+            <Custom Action="AlreadyInstalled" After="FindRelatedProducts">CURRENTVERSIONDETECTED</Custom>
             <Custom Action="Overwrite_WixSetDefaultPerMachineFolder" After="WixSetDefaultPerMachineFolder" />
         </InstallUISequence>
+
         <InstallExecuteSequence>
             <Custom Action="Overwrite_WixSetDefaultPerMachineFolder" After="WixSetDefaultPerMachineFolder" />
         </InstallExecuteSequence>
