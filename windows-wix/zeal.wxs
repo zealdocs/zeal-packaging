@@ -53,6 +53,7 @@
             <ComponentGroupRef Id="Binaries" />
             <ComponentGroupRef Id="Binaries_Imageformats" />
             <ComponentGroupRef Id="Binaries_Platforms" />
+            <ComponentGroupRef Id="Binaries_Styles" />
             <ComponentRef Id="ProgramMenuDir" />
         </Feature>
 
@@ -119,6 +120,10 @@
 
         <ComponentGroup Id="Binaries_Platforms" Directory="APPLICATIONFOLDER_PLATFORMS" Source="$(var.AppPackageDir)\platforms">
             <Component><File Name="qwindows.dll" Checksum="yes" KeyPath="yes" /></Component>
+        </ComponentGroup>
+
+        <ComponentGroup Id="Binaries_Styles" Directory="APPLICATIONFOLDER_PLATFORMS" Source="$(var.AppPackageDir)\styles">
+            <Component><File Name="qwindowsvistastyle.dll" Checksum="yes" KeyPath="yes" /></Component>
         </ComponentGroup>
 
         <Component Id="ProgramMenuDir" Directory="ProgramMenuDir">
