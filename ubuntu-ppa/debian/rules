@@ -1,16 +1,19 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
+#export DH_VERBOSE = 1
 
+export DEB_BUILD_MAINT_OPTIONS := hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND := -Wl,--as-needed
+export QT_SELECT := qt5
+
+DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/default.mk
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
-
-export QT_SELECT=qt5
-
 %:
-	dh $@ --buildsystem=qmake --dbg-package=zeal-dbg
+	dh $@ --fail-missing
+
+override_dh_strip:
+	dh_strip --ddeb-migration='zeal-dbg (<< 1:0.2.1-1~)'
 
 override_dh_auto_configure:
-#	dh_auto_configure -- DESTDIR=$(CURDIR)
-	qmake zeal.pro QMAKE_STRIP=:
+	cat debian/*manpages | sed 's/$$/.txt/p' | xargs -n 1 a2x --doctype manpage --format manpage
+	dh_auto_configure
