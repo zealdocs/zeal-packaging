@@ -1,3 +1,9 @@
+zeal (1:0.6.1-3ppa1~#DISTR#1) #DISTR#; urgency=low
+
+  * New upstream release.
+
+ -- Simon Epskamp <apt@simonsimon.nl>  Fri, 19 Oct 2018 22:37:54 -0400
+ 
 zeal (1:0.5.0-1ppa1~#DISTR#1) #DISTR#; urgency=low
 
   * New upstream release.

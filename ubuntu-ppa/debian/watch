@@ -1,0 +1,2 @@
+version=3
+https://github.com/zealdocs/zeal/releases .*/v(\d\S*).tar.gz

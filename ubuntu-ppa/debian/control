@@ -1,25 +1,36 @@
 Source: zeal
-Section: devel
-Priority: extra
 Maintainer: Simon Epskamp <apt@simonsimon.nl>
-Build-Depends: debhelper (>= 8.0.0), qtbase5-private-dev, libqt5webkit5-dev, libqt5x11extras5-dev, libarchive-dev, libappindicator-dev, libxcb-keysyms1-dev, libsqlite3-dev
-Standards-Version: 3.9.4
-Homepage: http://zealdocs.org
+Section: utils
+Priority: optional
+Build-Depends: debhelper (>= 11),
+               asciidoc-base,
+               cmake (>= 3.5.1),
+               extra-cmake-modules,
+               libappindicator-dev,
+               libarchive-dev,
+               libqt5webkit5-dev,
+               libqt5x11extras5-dev,
+               libsqlite3-dev,
+               libxcb-keysyms1-dev,
+               qtbase5-dev (>= 5.5.1),
+               qtbase5-private-dev,
+               xmlto,
+Standards-Version: 4.1.3
 Vcs-Git: git://github.com/zealdocs/zeal.git
 Vcs-Browser: https://github.com/zealdocs/zeal
+Homepage: http://zealdocs.org/
 
 Package: zeal
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5sql5-sqlite
-Description: Zeal Documentation Browser
- Zeal is an offline documentation browser inspired by Dash.
-
-Package: zeal-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends: ${misc:Depends}, zeal (= ${binary:Version})
-Description: Debug symbols for zeal
- Zeal is an offline documentation browser inspired by Dash.
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         libqt5sql5-sqlite
+Description: Simple offline API documentation browser
+ Zeal is a simple offline API documentation browser inspired by Dash (OS X
+ app), available for Linux and Windows.
  .
- This package contains debug symbols for zeal.
+  * Quickly search documentation using Alt+Space (or customised) hotkey to
+    display Zeal from any place in your workspace.
+  * Search in multiple sets of documentation at once.
+  * Don't be dependent on your internet connection.
+  * Integrate Zeal with Emacs, Sublime Text, or Vim.
