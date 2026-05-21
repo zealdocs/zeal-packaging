@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Ubuntu distributions
-# Added Jammy Noble because it wouldn't work with my noble release 21 May 2026
-DISTRS=(bionic cosmic jammy noble)
+DISTRS=(jammy noble)
 PPA="zeal-developers/ppa"
 
 function failure {
