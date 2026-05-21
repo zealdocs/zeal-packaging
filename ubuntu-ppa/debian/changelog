@@ -1,3 +1,7 @@
+zeal (1:0.8.1-1ppa1~#DISTR#1) #DISTR#; urgency=high
+     * New upstream release.
+    -- M.D Saadawy <md.saadawy@gmail.com>  Thu, 21 May 2026 12:45:00 -0400
+
 zeal (1:0.6.1-3ppa1~#DISTR#1) #DISTR#; urgency=low
 
   * New upstream release.
