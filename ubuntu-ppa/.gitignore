@@ -1,7 +1,0 @@
-*.tar.gz
-*.dsc
-*.build
-*.changes
-*.ppa.upload
-zeal-*
-zeal_*
