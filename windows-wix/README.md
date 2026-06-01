@@ -1,3 +1,3 @@
-## Instructions for building MSI installer.
+# WiX Installer Metadata (MSI)
 
-Moved to the [main repository](https://github.com/zealdocs/zeal/tree/master/pkg/wix).
+Superseded by [`pkg/wix`](https://github.com/zealdocs/zeal/tree/main/pkg/wix) in the main repository.
